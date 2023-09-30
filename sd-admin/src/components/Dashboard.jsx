@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Tile from './Tile'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
+import { UserDataContext } from './context/UserContext';
+import UseLogout from './Hooks/UseLogout';
 
 
-function Dashboard({data,setData}) {
+
+function Dashboard() {
  
  
   let dashboardData = [{
@@ -35,6 +38,8 @@ function Dashboard({data,setData}) {
 },
 
 ]
+let {data,setData}=useContext(UserDataContext)
+let logout = UseLogout()
 const navigate = useNavigate()
 
 let handleDelete = (index)=>{
@@ -48,12 +53,12 @@ let handleDelete = (index)=>{
 <div className="container-fluid">
     <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-        <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                className="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        <butten className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onClick={logout}> Logout</butten>
     </div>
     <div className="row">
        {
         dashboardData.map((e,i)=>{
+          
             return <Tile color={e.color}
                          icon={e.icon}
                          title={e.title}
